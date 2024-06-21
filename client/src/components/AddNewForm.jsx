@@ -1,6 +1,8 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
+import phonebook_service from '../services/phonebook_service';
 
-export const AddNewForm = () => {
+export const AddNewForm = ({ onAddNew }) => {
   const initialFormData = {
     name: '',
     phone: '',
@@ -19,7 +21,9 @@ export const AddNewForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Form Data: ', formData);
+    phonebook_service.addNewEntry({ name: formData.name, phone: formData.phone });
     setFormData(initialFormData);
+    onAddNew();
   };
 
   return (

@@ -8,19 +8,26 @@ const App = () => {
 
   console.log(entries);
 
+  const fetchEntries = async () => {
+    let response = await phonebook_service.getAll();
+    response = await response.data;
+    console.log('fetchEntry triggered!');
+    setEntries(response);
+  };
+
   useEffect(() => {
-    const fetchEntries = async () => {
-      let response = await phonebook_service.getAll();
-      response = await response.data;
-      setEntries(response);
-    };
+    // const fetchEntries = async () => {
+    //   let response = await phonebook_service.getAll();
+    //   response = await response.data;
+    //   setEntries(response);
+    // };
 
     fetchEntries();
   }, []);
 
   return (
     <div>
-      <AddNewForm />
+      <AddNewForm onAddNew={fetchEntries} />
       {entries && <ListOfEntries entries={entries} />}
     </div>
   );
