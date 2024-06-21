@@ -5,8 +5,13 @@ const getAll = () => {
   return axios(baseUrl);
 };
 
+const addNewEntry = (name, phone) => {
+  return axios.post(baseUrl, { name: name, phone: phone });
+};
+
 const exportedObject = {
   getAll,
+  addNewEntry,
 };
 
 export default exportedObject;

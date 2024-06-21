@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import phonebook_service from './services/phonebook_service';
 import { ListOfEntries } from './components/ListOfEntries';
+import { AddNewForm } from './components/AddNewForm';
 
 const App = () => {
   const [entries, setEntries] = useState([]);
@@ -17,7 +18,12 @@ const App = () => {
     fetchEntries();
   }, []);
 
-  return <div>{entries && <ListOfEntries entries={entries} />}</div>;
+  return (
+    <div>
+      <AddNewForm />
+      {entries && <ListOfEntries entries={entries} />}
+    </div>
+  );
 };
 
 export default App;
