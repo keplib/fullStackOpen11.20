@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import phonebook_service from './services/phonebook_service';
+import { ListOfEntries } from './components/ListOfEntries';
 
 const App = () => {
   const [entries, setEntries] = useState([]);
@@ -16,12 +17,7 @@ const App = () => {
     fetchEntries();
   }, []);
 
-  return (
-    <div>
-      <p>Hello from client</p>
-      <p>{entries && JSON.stringify(entries)}</p>
-    </div>
-  );
+  return <div>{entries && <ListOfEntries entries={entries} />}</div>;
 };
 
 export default App;
