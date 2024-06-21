@@ -1,6 +1,9 @@
 const express = require('express');
 var MongoClient = require('mongodb').MongoClient;
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 
 const url = 'mongodb://admin:password@localhost:27017';
 const dbName = 'phonebook';
@@ -18,7 +21,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/get-profile', async (req, res) => {
+app.get('/api/phonebook-entries', async (req, res) => {
   try {
     const collection = db.collection('phonebook-entries');
     const data = await collection.find().toArray();
