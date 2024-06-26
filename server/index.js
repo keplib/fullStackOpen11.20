@@ -47,6 +47,7 @@ app.post('/api/phonebook-entries', async (req, res) => {
     const newData = req.body;
     const result = await collection.insertOne(newData);
     res.status(201); // Respond with the newly created document
+    res.send(newData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while saving data' });

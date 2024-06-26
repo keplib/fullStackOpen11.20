@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import phonebook_service from '../services/phonebook_service';
 
-export const AddNewForm = ({ onAddNew }) => {
+export const AddNewForm = ({ entries, setEntries }) => {
   const initialFormData = {
     name: '',
     phone: '',
@@ -18,12 +18,11 @@ export const AddNewForm = ({ onAddNew }) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log('Form Data: ', formData);
-    phonebook_service.addNewEntry({ name: formData.name, phone: formData.phone });
+    const response = await phonebook_service.addNewEntry({ name: formData.name, phone: formData.phone });
     setFormData(initialFormData);
-    onAddNew();
+    setEntries(entries.concat(response.data));
   };
 
   return (
