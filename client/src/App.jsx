@@ -19,7 +19,7 @@ const App = () => {
   return (
     <div>
       <AddNewForm entries={entries} setEntries={setEntries} />
-      {entries && <ListOfEntries entries={entries} />}
+      {entries && <ListOfEntries entries={entries} setEntries={setEntries} />}
     </div>
   );
 };
