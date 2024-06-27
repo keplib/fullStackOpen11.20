@@ -1,5 +1,6 @@
 const express = require('express');
 var MongoClient = require('mongodb').MongoClient;
+var mongodb = require('mongodb');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
@@ -51,6 +52,20 @@ app.post('/api/phonebook-entries', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while saving data' });
+  }
+});
+
+app.delete('/api/phonebook-entries/:id', async (req, res) => {
+  try {
+    const collection = db.collection('phonebook-entries');
+    const idToDelete = req.params.id;
+    const query = { _id: mongodb.ObjectId.createFromHexString(idToDelete) };
+    const result = await collection.findOneAndDelete(query);
+    res.status(201); // Respond with the newly created document
+    res.send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while deleting data' });
   }
 });
 
