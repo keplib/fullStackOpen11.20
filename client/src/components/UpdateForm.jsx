@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import phonebook_service from '../services/phonebook_service';
 
-export const UpdateForm = ({ personToUpdate, setShowUpdateForm }) => {
+export const UpdateForm = ({ personToUpdate, setShowUpdateForm, entries, setEntries }) => {
   const initialFormData = {
     name: personToUpdate.name,
     phone: personToUpdate.phone,
@@ -24,9 +24,12 @@ export const UpdateForm = ({ personToUpdate, setShowUpdateForm }) => {
       name: formData.name,
       phone: formData.phone,
     });
-    console.log('response from API ------->', response);
+    const updatedList = entries.map((entry) => {
+      if (entry._id === personToUpdate._id) return response.data;
+      else return entry;
+    });
     setShowUpdateForm(false);
-    //   setEntries(entries.concat(response.data));
+    setEntries(updatedList);
   };
 
   return (

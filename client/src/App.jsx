@@ -31,7 +31,14 @@ const App = () => {
           setPersonToUpdate={setPersonToUpdate}
         />
       )}
-      {showUpdateForm && <UpdateForm personToUpdate={personToUpdate} setShowUpdateForm={setShowUpdateForm} />}
+      {showUpdateForm && (
+        <UpdateForm
+          personToUpdate={personToUpdate}
+          setShowUpdateForm={setShowUpdateForm}
+          entries={entries}
+          setEntries={setEntries}
+        />
+      )}
     </div>
   );
 };
