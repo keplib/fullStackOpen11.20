@@ -9,9 +9,7 @@ export const ListOfEntries = ({ entries, setEntries, setShowUpdateForm, showUpda
     }
   };
 
-  const updateHandler = (person) => {
-    console.log('update will be triggered');
-    console.log('selected person is: ', person);
+  const updateHandler = async (person) => {
     setPersonToUpdate(person);
     setShowUpdateForm(!showUpdateForm);
   };

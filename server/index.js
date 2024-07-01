@@ -44,10 +44,10 @@ app.get('/api/phonebook-entries', async (req, res) => {
 
 app.post('/api/phonebook-entries', async (req, res) => {
   try {
-    const collection = db.collection('phonebook-entries'); // Replace with your collection name
+    const collection = db.collection('phonebook-entries');
     const newData = req.body;
     const result = await collection.insertOne(newData);
-    res.status(201); // Respond with the newly created document
+    res.status(201);
     res.send(newData);
   } catch (error) {
     console.error(error);
@@ -61,8 +61,23 @@ app.delete('/api/phonebook-entries/:id', async (req, res) => {
     const idToDelete = req.params.id;
     const query = { _id: mongodb.ObjectId.createFromHexString(idToDelete) };
     const result = await collection.findOneAndDelete(query);
-    res.status(201); // Respond with the newly created document
+    res.status(201);
     res.send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while deleting data' });
+  }
+});
+
+app.put('/api/phonebook-entries/:id', async (req, res) => {
+  try {
+    const collection = db.collection('phonebook-entries');
+    const updatedEntry = req.body;
+    const idToUpdate = req.params.id;
+    const query = { _id: mongodb.ObjectId.createFromHexString(idToUpdate) };
+    const result = await collection.replaceOne(query, updatedEntry);
+    res.status(201);
+    res.send({ ...updatedEntry, _id: idToUpdate });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while deleting data' });

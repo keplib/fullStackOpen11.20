@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-// import phonebook_service from '../services/phonebook_service';
+import phonebook_service from '../services/phonebook_service';
 
 export const UpdateForm = ({ personToUpdate, setShowUpdateForm }) => {
   const initialFormData = {
@@ -20,9 +20,11 @@ export const UpdateForm = ({ personToUpdate, setShowUpdateForm }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //   const response = await phonebook_service.addNewEntry({ name: formData.name, phone: formData.phone });
-    // setFormData(initialFormData);
-    console.log('formData ------>', formData);
+    const response = await phonebook_service.updateEntry(personToUpdate._id, {
+      name: formData.name,
+      phone: formData.phone,
+    });
+    console.log('response from API ------->', response);
     setShowUpdateForm(false);
     //   setEntries(entries.concat(response.data));
   };
