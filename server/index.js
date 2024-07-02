@@ -15,7 +15,7 @@ app.use(
 
 app.use(bodyParser.json());
 
-const url = 'mongodb://admin:password@localhost:27017';
+const url = 'mongodb://admin:password@mongodb:27017';
 const dbName = 'phonebook';
 
 let db;

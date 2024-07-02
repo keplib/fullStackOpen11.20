@@ -17,6 +17,12 @@ services:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
       - ME_CONFIG_MONGODB_ADMINPASSWORD=password
       - ME_CONFIG_MONGODB_SERVER=mongodb
+  server:
+    image: phonebook-backend
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
 volumes:
   mongo-data:
     driver: local
