@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = 'http://localhost:3000/api/phonebook-entries';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const getAll = () => {
   return axios(baseUrl);
