@@ -4,8 +4,8 @@ import phonebook_service from '../services/phonebook_service';
 export const ListOfEntries = ({ entries, setEntries, setShowUpdateForm, showUpdateForm, setPersonToUpdate }) => {
   const deleteHandler = async (person) => {
     if (window.confirm(`Do you really want to delete ${person.name}?`)) {
-      const response = await phonebook_service.deleteEntry(person._id);
-      setEntries(entries.filter((item) => item._id !== response.data._id));
+      const response = await phonebook_service.deleteEntry(person.id);
+      setEntries(entries.filter((item) => item.id !== response.data.id));
     }
   };
 
@@ -18,8 +18,8 @@ export const ListOfEntries = ({ entries, setEntries, setShowUpdateForm, showUpda
     <>
       <h2>Phone Numbers</h2>
       {entries.map((entry) => (
-        <p key={entry._id}>
-          {entry.name} - {entry.phone} <button onClick={() => deleteHandler(entry)}>delete</button>
+        <p key={entry.id}>
+          {entry.name} - {entry.number} <button onClick={() => deleteHandler(entry)}>delete</button>
           <button onClick={() => updateHandler(entry)}>update</button>
         </p>
       ))}

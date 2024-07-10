@@ -5,7 +5,7 @@ import phonebook_service from '../services/phonebook_service';
 export const UpdateForm = ({ personToUpdate, setShowUpdateForm, entries, setEntries }) => {
   const initialFormData = {
     name: personToUpdate.name,
-    phone: personToUpdate.phone,
+    phone: personToUpdate.number,
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -20,12 +20,12 @@ export const UpdateForm = ({ personToUpdate, setShowUpdateForm, entries, setEntr
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await phonebook_service.updateEntry(personToUpdate._id, {
+    const response = await phonebook_service.updateEntry(personToUpdate.id, {
       name: formData.name,
-      phone: formData.phone,
+      number: formData.phone,
     });
     const updatedList = entries.map((entry) => {
-      if (entry._id === personToUpdate._id) return response.data;
+      if (entry.id === personToUpdate.id) return response.data;
       else return entry;
     });
     setShowUpdateForm(false);

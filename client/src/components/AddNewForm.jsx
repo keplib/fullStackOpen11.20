@@ -20,7 +20,7 @@ export const AddNewForm = ({ entries, setEntries }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await phonebook_service.addNewEntry({ name: formData.name, phone: formData.phone });
+    const response = await phonebook_service.addNewEntry({ name: formData.name, number: formData.phone });
     setFormData(initialFormData);
     setEntries(entries.concat(response.data));
   };
