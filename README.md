@@ -1,6 +1,6 @@
-#Submission for the final exercise of Fullstack Open part 11
+# Submission for the final exercise of Fullstack Open part 11
 
-##Purpose
+## Purpose
 This repo contains the solutions for exercise 11.21 and 11.22 of [Fullstack Open course part 11 - Introduction to CI/CD](https://fullstackopen.com/en/part11/).
 Purpose of this exercise was deploying a fullstack app and building a CI/CD pipeline.
 
