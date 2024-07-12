@@ -18,21 +18,12 @@ services:
     volumes:
       - ./db/data:/data/db
       - ./db/scripts:/docker-entrypoint-initdb.d
-  # app:
-  #   build:
-  #     context: ./client
-  #   ports:
-  #     - 8000:80
-  #   depends_on:
-  #     - server
-  #     - mongodb
-  # nginx:
-  #   image: nginx:1.20.1
-  #   volumes:
-  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
-  #   ports:
-  #     - 8001:80
-  #   container_name: reverse-proxy
-  #   depends_on:
-  #     - app # wait for the frontend container to be started
-  #     - server
+  app:
+    build:
+      context: ./client
+      dockerfile: dev.Dockerfile
+    ports:
+      - 8000:5173
+    depends_on:
+      - server
+      - mongodb
