@@ -5,7 +5,7 @@ const getAll = () => {
   return axios(baseUrl);
 };
 
-const addNewEntry = (name, phone) => {
+export const addNewEntry = (name, phone) => {
   return axios.post(baseUrl, name, phone);
 };
 
