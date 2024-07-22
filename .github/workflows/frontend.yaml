@@ -8,9 +8,18 @@ on:
       - 'client/**'
 
 jobs:
-  hello_world_job:
+  simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - name: Say hello
-        run: |
-          echo "Hello World from frontend"
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependecies
+        run: npm install
+      - name: Check style
+        run: npm run lint
+      - name: Run build
+        run: npm run build
+      - name: Run unit tests
+        run: npm run test
