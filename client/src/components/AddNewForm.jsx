@@ -20,9 +20,13 @@ export const AddNewForm = ({ entries, setEntries }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await addNewEntry({ name: formData.name, number: formData.phone });
-    setFormData(initialFormData);
-    setEntries(entries.concat(response.data));
+    try {
+      const response = await addNewEntry({ name: formData.name, number: formData.phone });
+      setFormData(initialFormData);
+      setEntries(entries.concat(response.data));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -37,7 +41,9 @@ export const AddNewForm = ({ entries, setEntries }) => {
           <label htmlFor="phone">Phone:</label>
           <input type="text" id="phone" name="phone" value={formData.phone} onChange={handleChange} />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" data-testid="submit-button">
+          Submit
+        </button>
       </form>
     </div>
   );
