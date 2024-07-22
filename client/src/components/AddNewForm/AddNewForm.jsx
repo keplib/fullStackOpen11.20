@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import { addNewEntry } from '../services/phonebook_service';
+import { addNewEntry } from '../../services/phonebook_service';
 
 export const AddNewForm = ({ entries, setEntries }) => {
   const initialFormData = {

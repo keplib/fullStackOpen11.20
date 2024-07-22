@@ -1,9 +1,9 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import { AddNewForm } from './AddNewForm';
-import * as phonebookService from '../services/phonebook_service';
+import * as phonebookService from '../../services/phonebook_service';
 
-test('renders content', async () => {
+test('Component triggers the right fucntion on Submit', async () => {
   const mockSubmitService = vi
     .spyOn(phonebookService, 'addNewEntry')
     .mockResolvedValue({ data: { name: 'test', phone: 'test' } });

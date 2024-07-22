@@ -9,7 +9,7 @@ export const addNewEntry = (name, phone) => {
   return axios.post(baseUrl, name, phone);
 };
 
-const deleteEntry = (id) => {
+export const deleteEntry = (id) => {
   return axios.delete(`${baseUrl}/${id}`);
 };
 
