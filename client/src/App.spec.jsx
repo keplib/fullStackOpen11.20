@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { expect, vi } from 'vitest';
 import App from './App';
 import { getAll } from './services/phonebook_service';
