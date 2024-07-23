@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import phonebook_service from './services/phonebook_service';
-import { ListOfEntries } from './components/ListOfEntries';
-import { AddNewForm } from './components/AddNewForm';
-import { UpdateForm } from './components/UpdateForm';
+import { ListOfEntries } from './components/ListOfEntries/ListOfEntries';
+import { AddNewForm } from './components/AddNewForm/AddNewForm';
+import { UpdateForm } from './components/UpdateForm/UpdateForm';
 
 const App = () => {
   const [entries, setEntries] = useState([]);
