@@ -1,7 +1,7 @@
 import axios from 'axios';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-const getAll = () => {
+export const getAll = () => {
   return axios(baseUrl);
 };
 
@@ -13,7 +13,7 @@ export const deleteEntry = (id) => {
   return axios.delete(`${baseUrl}/${id}`);
 };
 
-const updateEntry = (id, updatedEntry) => {
+export const updateEntry = (id, updatedEntry) => {
   return axios.put(`${baseUrl}/${id}`, updatedEntry);
 };
 

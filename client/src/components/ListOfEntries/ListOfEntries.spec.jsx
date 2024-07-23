@@ -6,6 +6,11 @@ import { deleteEntry } from '../../services/phonebook_service';
 
 vi.mock('../../services/phonebook_service');
 
+beforeEach(() => {
+  vi.resetModules();
+  vi.clearAllMocks();
+});
+
 test('Component renders the correct amount of entries', async () => {
   render(<ListOfEntries entries={mockEntries} />);
 
@@ -31,9 +36,47 @@ test('Entries can be deleted', async () => {
     expect(window.confirm).toHaveBeenCalled();
   });
 
-  screen.debug();
-
   await waitFor(() => {
     expect(deleteEntry).toHaveBeenCalled();
   });
+});
+
+test('Entries wont be deleted when user denies', async () => {
+  const mockSetEntries = vi.fn();
+
+  window.confirm = vi.fn().mockImplementation(() => false);
+
+  render(<ListOfEntries entries={mockEntries} setEntries={mockSetEntries} />);
+
+  const deleteButtons = screen.getAllByRole('button', { name: /delete/i });
+
+  fireEvent.click(deleteButtons[0]);
+
+  await waitFor(() => {
+    expect(window.confirm).toHaveBeenCalled();
+  });
+
+  await waitFor(() => {
+    expect(deleteEntry).not.toHaveBeenCalled();
+  });
+});
+
+test('Clicking on Update will trigger update handler ', async () => {
+  const mockSetPersonToUpdate = vi.fn();
+  const mockSetShowUpdateForm = vi.fn();
+
+  render(
+    <ListOfEntries
+      entries={mockEntries}
+      setPersonToUpdate={mockSetPersonToUpdate}
+      setShowUpdateForm={mockSetShowUpdateForm}
+    />
+  );
+
+  const updateButtons = screen.getAllByRole('button', { name: /update/i });
+
+  fireEvent.click(updateButtons[0]);
+
+  expect(mockSetPersonToUpdate).toHaveBeenCalled();
+  expect(mockSetShowUpdateForm).toHaveBeenCalled();
 });

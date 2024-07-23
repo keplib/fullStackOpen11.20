@@ -45,6 +45,7 @@ export const UpdateForm = ({ personToUpdate, setShowUpdateForm, entries, setEntr
             value={formData.name}
             onChange={handleChange}
             placeholder={initialFormData.name}
+            data-testid="name-input"
           />
         </div>
         <div>
@@ -56,6 +57,7 @@ export const UpdateForm = ({ personToUpdate, setShowUpdateForm, entries, setEntr
             value={formData.phone}
             onChange={handleChange}
             placeholder={initialFormData.phone}
+            data-testid="number-input"
           />
         </div>
         <button type="submit">Submit</button>
