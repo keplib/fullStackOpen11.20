@@ -1,12 +1,12 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { vi } from 'vitest';
 import { AddNewForm } from './AddNewForm';
-import * as phonebookService from '../../services/phonebook_service';
+import { addNewEntry } from '../../services/phonebook_service';
+
+vi.mock('../../services/phonebook_service');
 
 test('Component triggers the right fucntion on Submit', async () => {
-  const mockSubmitService = vi
-    .spyOn(phonebookService, 'addNewEntry')
-    .mockResolvedValue({ data: { name: 'test', phone: 'test' } });
+  vi.mocked(addNewEntry).mockResolvedValue({ data: { name: 'test', number: 'test' } });
 
   const mockEntries = [];
   const mockSetEntries = vi.fn();
@@ -22,6 +22,6 @@ test('Component triggers the right fucntion on Submit', async () => {
   fireEvent.click(submitButton);
 
   await waitFor(() => {
-    expect(mockSubmitService).toHaveBeenCalledWith({ name: 'John Doe', number: '123342' });
+    expect(addNewEntry).toHaveBeenCalledWith({ name: 'John Doe', number: '123342' });
   });
 });
