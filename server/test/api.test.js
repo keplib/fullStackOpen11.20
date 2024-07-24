@@ -23,7 +23,7 @@ beforeEach(async () => {
 });
 
 describe('API endpoint test', () => {
-  it('should retrieve all items', async () => {
+  it('should retrieve all two dummy items', async () => {
     const res = await request(app).get('/api/phonebook-entries').expect(200);
 
     expect(res.body.length).toBe(2);
