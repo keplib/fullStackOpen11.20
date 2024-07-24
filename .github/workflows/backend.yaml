@@ -10,14 +10,13 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    env:
+      MONGO_INITDB_ROOT_USERNAME: test
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: phonebook-dev
     services:
       mongodb:
-        image: mongo
-        env:
-          MONGO_INITDB_ROOT_USERNAME: test
-          MONGO_INITDB_ROOT_PASSWORD: password
-          MONGO_INITDB_DATABASE: phonebook-dev
+        image: mongo:4.4.6
         ports:
           - 27017:27017
         options: >-
@@ -25,7 +24,6 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 10
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
