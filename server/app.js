@@ -27,10 +27,6 @@ const connectDB = async () => {
 
 connectDB();
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
-
 app.use('/api/phonebook-entries', entriesRouter);
 
 module.exports = app;
