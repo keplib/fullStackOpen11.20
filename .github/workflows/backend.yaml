@@ -45,4 +45,6 @@ jobs:
 
       - name: Run tests
         working-directory: ./server
+        env:
+          MONGODB_URL_DEV: mongodb://root:password@mongodb:27017/phonebook-dev
         run: npm run test
