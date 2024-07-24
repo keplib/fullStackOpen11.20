@@ -7,7 +7,7 @@ entriesRouter.get('/', async (req, res) => {
     res.send(entries);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'An error occurred while fetching data' });
+    res.status(500).json({ error: 'An error occurred while fetching data!' });
   }
 });
 
