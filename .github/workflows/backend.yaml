@@ -11,8 +11,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      MONGO_INITDB_ROOT_USERNAME: test
-      MONGO_INITDB_ROOT_PASSWORD: password
+      # MONGO_INITDB_ROOT_USERNAME: test
+      # MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: phonebook-dev
     services:
       mongodb:
@@ -46,5 +46,5 @@ jobs:
       - name: Run tests
         working-directory: ./server
         env:
-          MONGODB_URL_DEV: mongodb://test:password@mongodb:27017/phonebook-dev
+          MONGODB_URL_DEV: mongodb://mongodb:27017/phonebook-dev
         run: npm run test
