@@ -13,7 +13,7 @@ jobs:
     env:
       # MONGO_INITDB_ROOT_USERNAME: test
       # MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: phonebook-dev
+      MONGO_INITDB_DATABASE: phonebook_dev
     services:
       mongodb:
         image: mongo:4.4.6
@@ -46,5 +46,5 @@ jobs:
       - name: Run tests
         working-directory: ./server
         env:
-          MONGODB_URL_DEV: mongodb://localhost:27017/phonebook-dev
+          MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
         run: npm run test
