@@ -6,13 +6,14 @@ on:
       - main
     paths:
       - 'server/**'
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      # MONGO_INITDB_ROOT_USERNAME: test
-      # MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: phonebook_dev
     services:
       mongodb:
@@ -48,3 +49,9 @@ jobs:
         env:
           MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
         run: npm run test
+      - name: Trigger deployment
+        env:
+          deploy_url: ${{ secrets.BE_RENDER_DEPLOY_URL }}
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          curl "$deploy_url"

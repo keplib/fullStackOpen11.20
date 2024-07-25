@@ -31,4 +31,5 @@ jobs:
         working-directory: ./client
         run: npm run test
       - name: Trigger deployment
+        if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_DEPLOY_HOOK_URL }}?key=${{ secrets.RENDER_DEPLOY_KEY }}
