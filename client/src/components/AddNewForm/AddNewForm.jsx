@@ -31,7 +31,7 @@ export const AddNewForm = ({ entries, setEntries }) => {
 
   return (
     <div>
-      <h2>Add new</h2>
+      <h2>Add new entry</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Name:</label>
