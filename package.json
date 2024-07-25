@@ -1,0 +1,14 @@
+{
+  "devDependencies": {
+    "@playwright/test": "^1.45.3",
+    "@types/node": "^20.14.12",
+    "concurrently": "^8.2.2",
+    "playwright": "^1.45.3"
+  },
+  "scripts": {
+    "start:frontend": "cd client && npm run dev",
+    "start:backend": "cd server && npm run dev",
+    "start:db": "cd db &&  docker compose -f docker-compose.test.yaml up",
+    "start:all": "concurrently \"npm run start:db\" \"npm run start:backend\" \"npm run start:frontend\""
+  }
+}
