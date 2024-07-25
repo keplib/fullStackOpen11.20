@@ -27,6 +27,10 @@ const connectDB = async () => {
 
 connectDB();
 
+app.get('/healthcheck', (req, res) => {
+  res.send('Up and running!');
+});
+
 app.use('/api/phonebook-entries', entriesRouter);
 
 module.exports = app;
