@@ -21,6 +21,7 @@ const App = () => {
 
   return (
     <div>
+      <h2>Phonebook app</h2>
       <AddNewForm entries={entries} setEntries={setEntries} />
       {entries && (
         <ListOfEntries
