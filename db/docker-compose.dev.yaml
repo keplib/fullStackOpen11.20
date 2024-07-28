@@ -2,10 +2,11 @@ version: '3.8'
 services:
   mongodb:
     image: mongo
+    container_name: mongo-dev
     environment:
       - MONGO_INITDB_DATABASE=phonebook_dev
     ports:
       - '27017:27017'
     volumes:
-      - ./data:/data/db
+      # - ./data:/data/db
       - ./scripts:/docker-entrypoint-initdb.d

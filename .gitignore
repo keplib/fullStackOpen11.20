@@ -4,3 +4,7 @@ node_modules
 .env.production
 .env.test
 /db/data/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

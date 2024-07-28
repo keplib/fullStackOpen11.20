@@ -1,7 +1,8 @@
 version: '3.8'
 services:
-  mongodb:
+  mongodb-test:
     image: mongo
+    container_name: db-test
     environment:
       - MONGO_INITDB_DATABASE=phonebook_dev
     ports:

@@ -11,7 +11,7 @@ beforeEach(() => {
 });
 
 test('Component renders the correct amount of entries', async () => {
-  vi.mocked(getAll).mockResolvedValue({ data: { name: 'test', number: 'test' } });
+  vi.mocked(getAll).mockResolvedValue({ data: [{ name: 'test', number: 'test' }] });
   render(<App />);
 
   await waitFor(() => {
