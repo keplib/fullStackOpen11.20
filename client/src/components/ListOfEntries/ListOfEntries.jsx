@@ -21,8 +21,18 @@ export const ListOfEntries = ({ entries, setEntries, setShowUpdateForm, showUpda
   return (
     <>
       <h2>Phone Numbers</h2>
+      {/* {entries.length === 0 ? (
+        <p>No entries yet</p>
+      ) : (
+        entries.map((entry) => {
+          <p key={entry.id} data-testid="person-entry">
+            {entry.name} - {entry.number} <button onClick={() => deleteHandler(entry)}>delete</button>
+            <button onClick={() => updateHandler(entry)}>update</button>
+          </p>;
+        })
+      )} */}
+      {!entries.length && <p>No entries yet</p>}
       {entries &&
-        entries.length &&
         entries.map((entry) => (
           <p key={entry.id} data-testid="person-entry">
             {entry.name} - {entry.number} <button onClick={() => deleteHandler(entry)}>delete</button>

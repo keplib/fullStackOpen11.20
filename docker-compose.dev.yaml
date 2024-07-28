@@ -16,7 +16,7 @@ services:
     ports:
       - '27017:27017'
     volumes:
-      - ./db/data:/data/db
+      # - ./db/data:/data/db
       - ./db/scripts:/docker-entrypoint-initdb.d
   app:
     build:

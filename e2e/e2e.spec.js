@@ -20,7 +20,7 @@ test('Phonebook entries can be created, modified and deleted', async ({ page }) 
   const addedPersonNumber = await page.getByText('12345');
   await expect(addedPersonNumber).toBeVisible();
 
-  await page.getByRole('button', { name: 'update' }).first().click();
+  await page.getByRole('button', { name: 'update' }).last().click();
   await page.getByTestId('name-input').click();
   await page.getByTestId('name-input').fill('Test2');
   await page.getByTestId('number-input').click();
@@ -41,7 +41,7 @@ test('Phonebook entries can be created, modified and deleted', async ({ page }) 
     await dialog.accept();
   });
 
-  await page.getByRole('button', { name: 'delete' }).click();
+  await page.getByRole('button', { name: 'delete' }).last().click();
   await page.waitForTimeout(2000);
 
   await expect(updatedName).not.toBeVisible();
