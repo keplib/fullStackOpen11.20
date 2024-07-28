@@ -7,6 +7,3 @@ services:
       - MONGO_INITDB_DATABASE=phonebook_dev
     ports:
       - '27017:27017'
-    # volumes:
-    # - ./data:/data/db
-    # - ./scripts:/docker-entrypoint-initdb.d
