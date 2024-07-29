@@ -11,18 +11,18 @@ on:
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
-    env:
-      MONGO_INITDB_DATABASE: phonebook_dev
-    services:
-      mongodb:
-        image: mongo:4.4.6
-        ports:
-          - 27018:27017
-        options: >-
-          --health-cmd mongo
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 10
+    # env:
+    #   MONGO_INITDB_DATABASE: phonebook_dev
+    # services:
+    #   mongodb:
+    #     image: mongo:4.4.6
+    #     ports:
+    #       - 27018:27017
+    #     options: >-
+    #       --health-cmd mongo
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 10
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -30,7 +30,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
@@ -40,13 +40,13 @@ jobs:
           cd client && npm install
           cd ../server && npm install
           cd ..
-      - name: Wait for MongoDB
-        run: |
-          while ! nc -z localhost 27018; do
-            sleep 1
-          done
+      #   - name: Wait for MongoDB
+      #     run: |
+      #       while ! nc -z localhost 27018; do
+      #         sleep 1
+      #       done
 
       - name: Run E2E tests
         run: npx playwright test
         env:
-          MONGODB_URL_DEV: mongodb://localhost:27018/phonebook_dev
+          MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
