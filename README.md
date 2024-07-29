@@ -27,32 +27,27 @@ _Note: I'm using the free plan of the hosting platform and it might take a minut
 
 ## Running the app in development environment:
 
-You can run the app with one command using **docker-compose**.
+You can run the app with one command using **npm**.
 
 - Clone the repo
 - Run the following command from the root of the project:
-  `docker compose -f docker-compose.dev.yaml up `
+  `npm run start:all:dev`
 
-This command will spin up a local database from a **mongodb** container, populate it with some dummy data and then run both backend and frontend. You can reach the app on `localhost:8000`.
+This command will spin up a local database from a **mongodb** container, populate it with some dummy data and then run both backend and frontend. You can reach the app on `localhost:5173`.
 
 ## Running the backend
 
-If you only need to run the backend without modifying it you can do it by using **Docker**
-In the _/server_ folder run: `docker compose -f docker-compose.dev.yaml up `
+If you only need to run the backend without modifying it you can do it by using **npm**
+In the root folder run: `npm run start:dev-server`
 This will start both the local database and the backend and you can access it on `localhost:3000`.
-
-Otherwise, you can use **npm**:
-
-- First start the database: go to _/db_ folder and run `docker compose -f docker-compose.dev.yaml up`
-- Then go to _/server_ folder and run `npm i && npm run dev`. The server will be accessible on `localhost:3000`.
 
 ## Running the frontend:
 
-You can run **npm** to run the frontend app: go to _/client_ folder and run `npm i && npm run dev`. The app is hosted on `localhost:5173`.
+You can run **npm** to run the frontend app: in the root folder you need to run `npm run start:frontend`. The app is hosted on `localhost:5173`.
 
 ## Pushing code to production
 
-Merging to the master branch requires both an approval as well as passing all the tests in the **gtihub workflows**.
+Merging to the master branch requires both an approval as well as passing all the tests in the **gtihub workflows** that includes unit tests for the backend and frontend, plus linting and build for frontend.
 
 ## Frontend testing
 
@@ -61,5 +56,9 @@ For unit tests **vitest** is being used. You can run it using `npm run test` in 
 ## Backend testing
 
 For unit tests **supertest** is being used. There is an empty **mongodb** container dedicated for testing purposes.
-Start it first with `docker compose -f docker-compose.test.yaml up` from _/db_ folder.
+Start it first with `docker compose -f docker-compose.test.yaml up` from _/db_ folder (or: `npm run start:test-db` in the root).
 Then you can run the tests using `npm run test` in the _/server_ folder.
+
+## End2End testing
+
+Playwright is being used for executing the end to end tests. You can run them witn `npm run test:e2e` in the root.

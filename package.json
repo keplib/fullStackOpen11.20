@@ -8,8 +8,11 @@
   "scripts": {
     "start:frontend": "cd client && npm run dev",
     "start:backend": "cd server && npm run dev",
-    "start:db": "cd db &&  docker compose -f docker-compose.test.yaml up",
-    "start:all": "concurrently \"npm run start:db\" \"npm run start:backend\" \"npm run start:frontend\"",
-    "test": "playwright test"
+    "start:test-db": "cd db &&  docker compose -f docker-compose.test.yaml up",
+    "start:dev-db": "cd db &&  docker compose -f docker-compose.dev.yaml up",
+    "start:dev-server": "concurrently \"npm run start:test-db\" \"npm run start:backend\"",
+    "start:all:test": "concurrently \"npm run start:test-db\" \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:all:dev": "concurrently \"npm run start:dev-db\" \"npm run start:backend\" \"npm run start:frontend\"",
+    "test:e2e": "playwright test"
   }
 }
