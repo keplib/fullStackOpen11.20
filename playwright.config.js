@@ -72,22 +72,22 @@ module.exports = defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: [
     {
-      command: 'npm run start:test-db',
-      port: 27017,
+      command: 'npm run start:frontend',
+      url: 'http://127.0.0.1:5173',
       timeout: 120 * 1000,
-      reuseExistingServer: true,
+      reuseExistingServer: !process.env.CI,
     },
     {
       command: 'npm run start:backend',
-      port: 3000,
+      url: 'http://127.0.0.1:3000',
       timeout: 120 * 1000,
-      reuseExistingServer: true,
+      reuseExistingServer: !process.env.CI,
     },
     {
-      command: 'npm run start:frontend',
-      port: 5173,
+      command: 'npm run start:test-db',
+      url: 'mongodb://127.0.0.1:27017',
       timeout: 120 * 1000,
-      reuseExistingServer: true,
+      reuseExistingServer: !process.env.CI,
     },
   ],
 });
