@@ -35,14 +35,16 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Install dependencies for frontend and backend
+      - name: Install dependencies for frontend
         run: |
           cd client && npm install
-          cd ../server && npm install
           cd ..
+      - name: Install dependencies for backend
+        run: |
+          cd server && npm install
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        env:
-          MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
+        # env:
+        #   MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
         run: npx playwright test
