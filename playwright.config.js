@@ -75,7 +75,7 @@ module.exports = defineConfig({
       command: 'npm run start:db',
       port: 27017,
       timeout: 120 * 1000,
-      reuseExistingServer: !process.env.CI,
+      reuseExistingServer: true,
     },
     {
       command: 'npm run start:backend',
