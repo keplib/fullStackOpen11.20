@@ -17,7 +17,7 @@ jobs:
       mongodb:
         image: mongo:4.4.6
         ports:
-          - 27017:27017
+          - 27018:27017
         options: >-
           --health-cmd mongo
           --health-interval 10s
@@ -49,4 +49,4 @@ jobs:
       - name: Run E2E tests
         run: npx playwright test
         env:
-          MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
+          MONGODB_URL_DEV: mongodb://localhost:27018/phonebook_dev
