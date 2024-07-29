@@ -11,18 +11,18 @@ on:
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
-    # env:
-    #   MONGO_INITDB_DATABASE: phonebook_dev
-    # services:
-    #   mongodb:
-    #     image: mongo:4.4.6
-    #     ports:
-    #       - 27018:27017
-    #     options: >-
-    #       --health-cmd mongo
-    #       --health-interval 10s
-    #       --health-timeout 5s
-    #       --health-retries 10
+    services:
+      mongodb-test:
+        image: mongo:4.4.6
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_DATABASE: phonebook_dev
+        options: >-
+          --health-cmd mongo
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -37,13 +37,33 @@ jobs:
 
       - name: Install dependencies for frontend
         run: |
-          cd client && npm install
-          cd ..
+          cd client
+          npm install
+
       - name: Install dependencies for backend
         run: |
-          cd server && npm install
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+          cd server
+          npm install
+      - name: Start server
+        run: |
+          cd client
+          npm run dev &
+        env:
+          MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
+          PORT: 3000
+      - name: Start client
+        run: |
+          cd client
+          npm run dev &
+        env:
+          VITE_API_BASE_URL: http://localhost:3000/api/phonebbok-entries
+      - name: Wait for services to be ready
+        run: sleep 15s
+      - name: Install Playwright dependencies
+        run: |
+          npm install -D @playwright/test
+          npx playwright install-deps
+
       - name: Run Playwright tests
         # env:
         #   MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
