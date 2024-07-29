@@ -47,6 +47,6 @@ jobs:
       #       done
 
       - name: Run E2E tests
-        run: npx playwright test
+        run: npm run test:e2e
         env:
           MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
