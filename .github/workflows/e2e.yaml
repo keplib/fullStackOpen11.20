@@ -46,7 +46,7 @@ jobs:
           npm install
       - name: Start server
         run: |
-          cd client
+          cd server
           npm run dev &
         env:
           MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
