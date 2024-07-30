@@ -64,7 +64,7 @@ jobs:
           cd client
           npm run dev &
         env:
-          VITE_API_BASE_URL: http://localhost:3000/api/phonebbok-entries
+          VITE_API_BASE_URL: http://localhost:3000/api/phonebook-entries
       - name: Wait for services to be ready
         run: sleep 15s
       - name: Install Playwright dependencies
