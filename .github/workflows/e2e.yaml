@@ -1,0 +1,65 @@
+name: E2E Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install dependencies for frontend
+        run: |
+          cd client
+          npm install
+
+      - name: Install dependencies for backend
+        run: |
+          cd server
+          npm install
+      - name: Start database
+        run: |
+          npm run start:test-db &
+      - name: Wait for MongoDB
+        run: |
+          while ! nc -z localhost 27017; do
+            sleep 1
+          done
+      - name: Start server
+        run: |
+          cd server
+          npm run dev &
+        env:
+          MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
+          PORT: 3000
+      - name: Start client
+        run: |
+          cd client
+          npm run dev &
+        env:
+          VITE_API_BASE_URL: http://localhost:3000/api/phonebook-entries
+      - name: Wait for services to be ready
+        run: sleep 15s
+      - name: Install Playwright dependencies
+        run: |
+          npm install -D @playwright/test
+          npx playwright install-deps
+          npx playwright install
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
