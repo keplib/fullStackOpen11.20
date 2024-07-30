@@ -19,14 +19,17 @@ test('Component renders the correct amount of entries', async () => {
   expect(persons).toHaveLength(mockEntries.length);
 });
 
-test('Entries can be deleted', async () => {
-  vi.mocked(deleteEntry).mockResolvedValue({ data: { name: 'test', number: 'test' } });
+test('Entries can be deleted and notification will be triggered', async () => {
+  vi.mocked(deleteEntry).mockResolvedValue({ data: { name: 'Test Name', number: '12345' } });
 
   const mockSetEntries = vi.fn();
+  const mockTriggerNotification = vi.fn();
 
   window.confirm = vi.fn().mockImplementation(() => true);
 
-  render(<ListOfEntries entries={mockEntries} setEntries={mockSetEntries} />);
+  render(
+    <ListOfEntries entries={mockEntries} setEntries={mockSetEntries} triggerNotification={mockTriggerNotification} />
+  );
 
   const deleteButtons = screen.getAllByRole('button', { name: /delete/i });
 
@@ -38,6 +41,10 @@ test('Entries can be deleted', async () => {
 
   await waitFor(() => {
     expect(deleteEntry).toHaveBeenCalled();
+  });
+
+  await waitFor(() => {
+    expect(mockTriggerNotification).toHaveBeenCalledWith('You deleted Test Name from the phonebook!');
   });
 });
 
