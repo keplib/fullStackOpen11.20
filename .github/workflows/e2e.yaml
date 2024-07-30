@@ -76,4 +76,4 @@ jobs:
       - name: Run Playwright tests
         env:
           MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
-        run: npx playwright test
+        run: npm run test:e2e
