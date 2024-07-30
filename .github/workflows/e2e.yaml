@@ -44,6 +44,9 @@ jobs:
         run: |
           cd server
           npm install
+      - name: Start database
+        run: |
+          npm run start:test-db
       - name: Start server
         run: |
           cd server
@@ -51,10 +54,6 @@ jobs:
         env:
           MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
           PORT: 3000
-      - name: Start database
-        run: |
-          npm run start:db
-
       - name: Start client
         run: |
           cd client
