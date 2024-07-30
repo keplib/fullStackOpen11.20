@@ -11,18 +11,18 @@ on:
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
-    services:
-      mongodb-test:
-        image: mongo:4.4.6
-        ports:
-          - 27017:27017
-        env:
-          MONGO_INITDB_DATABASE: phonebook_dev
-        options: >-
-          --health-cmd mongo
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 10
+    # services:
+    #   mongodb-test:
+    #     image: mongo:4.4.6
+    #     ports:
+    #       - 27017:27017
+    #     env:
+    #       MONGO_INITDB_DATABASE: phonebook_dev
+    #     options: >-
+    #       --health-cmd mongo
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 10
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -51,6 +51,10 @@ jobs:
         env:
           MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
           PORT: 3000
+      - name: Start database
+        run: |
+          npm run start:db
+
       - name: Start client
         run: |
           cd client
