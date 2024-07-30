@@ -50,6 +50,7 @@ jobs:
           npm run dev &
         env:
           MONGODB_URL_DEV: mongodb://localhost:27017/phonebook_dev
+          PORT: 3000
       - name: Start client
         run: |
           cd client
