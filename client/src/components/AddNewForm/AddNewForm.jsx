@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { addNewEntry } from '../../services/phonebook_service';
 
-export const AddNewForm = ({ entries, setEntries }) => {
+export const AddNewForm = ({ entries, setEntries, triggerNotification }) => {
   const initialFormData = {
     name: '',
     phone: '',
@@ -24,6 +24,7 @@ export const AddNewForm = ({ entries, setEntries }) => {
       const response = await addNewEntry({ name: formData.name, number: formData.phone });
       setFormData(initialFormData);
       setEntries(entries.concat(response.data));
+      triggerNotification(`You added ${response.data.name} to the phonebook!`);
     } catch (error) {
       console.log(error);
     }
