@@ -46,7 +46,7 @@ jobs:
           npm install
       - name: Start database
         run: |
-          npm run start:test-db
+          npm run start:test-db &
       - name: Start server
         run: |
           cd server
