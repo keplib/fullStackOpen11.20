@@ -47,6 +47,11 @@ jobs:
       - name: Start database
         run: |
           npm run start:test-db &
+      - name: Wait for MongoDB
+        run: |
+          while ! nc -z localhost 27017; do
+            sleep 1
+          done
       - name: Start server
         run: |
           cd server
