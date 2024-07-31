@@ -33,7 +33,8 @@ export const ListOfEntries = ({
       {entries &&
         entries.map((entry) => (
           <p key={entry.id} data-testid="person-entry">
-            {entry.name} - {entry.number} <button onClick={() => deleteHandler(entry)}>delete</button>
+            {entry.name} - {entry.number}
+            <button onClick={() => deleteHandler(entry)}>delete</button>
             <button onClick={() => updateHandler(entry)}>update</button>
           </p>
         ))}
