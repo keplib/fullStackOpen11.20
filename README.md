@@ -5,9 +5,6 @@
 This repo contains the solutions for exercise 11.21 and 11.22 of [Fullstack Open course part 11 - Introduction to CI/CD](https://fullstackopen.com/en/part11/).
 Purpose of this exercise was deploying a fullstack app and building a CI/CD pipeline.
 
-[Course Notes part 11 - CD/CD](#course-notes-part-11-fullstack-open) <br>
-[Course Review part 11 - CI/CD](#course-review-part-11-fullstack-open) <br>
-
 ## Code base structure
 
 The app is a very simplistic phonebook app built from scratch. It's hosted in a monorepo that contains three main components:
@@ -41,7 +38,7 @@ If you only need to run the backend without modifying it you can do it by using 
 In the root folder run: `npm run start:dev-server`
 This will start both the local database and the backend and you can access it on `localhost:3000`.
 
-## Running the frontend:
+## Running the frontend
 
 You can run **npm** to run the frontend app: in the root folder you need to run `npm run start:frontend`. The app is hosted on `localhost:5173`.
 

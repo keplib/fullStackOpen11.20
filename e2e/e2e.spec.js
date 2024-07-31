@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 describe('E2E tests', () => {
   test('homepage loads and has the correct title', async ({ page }) => {
     await page.goto('http://localhost:5173');
-    const locator = await page.getByText('Phonebook');
+    const locator = page.getByText('Phonebook');
     await expect(locator).toBeVisible();
   });
 
@@ -17,10 +17,12 @@ describe('E2E tests', () => {
     await page.getByLabel('Phone:').fill('12345');
     await page.getByTestId('submit-button').click();
 
-    const addedPersonName = await page.getByText('Test');
-    await expect(addedPersonName).toBeVisible();
-    const addedPersonNumber = await page.getByText('12345');
-    await expect(addedPersonNumber).toBeVisible();
+    const addedPerson = await page.getByText('Test - 12345');
+    await expect(addedPerson).toBeVisible();
+    const notificationAfterAdd = page.getByTestId('notification-container');
+    await expect(notificationAfterAdd).toBeVisible();
+    const addNotificationText = await notificationAfterAdd.textContent();
+    expect(addNotificationText).toBe('You added Test to the phonebook!');
 
     await page.getByRole('button', { name: 'update' }).last().click();
     await page.getByTestId('name-input').click();
@@ -33,10 +35,12 @@ describe('E2E tests', () => {
       .getByRole('button')
       .click();
 
-    const updatedName = await page.getByText('Test2');
-    await expect(updatedName).toBeVisible();
-    const updatedNumber = await page.getByText('111111');
-    await expect(updatedNumber).toBeVisible();
+    const updatedPerson = await page.getByText('Test2 - 111111');
+    await expect(updatedPerson).toBeVisible();
+    const notificationAfterUpdate = page.getByTestId('notification-container');
+    await expect(notificationAfterUpdate).toBeVisible();
+    const updateNotificationText = await notificationAfterUpdate.textContent();
+    expect(updateNotificationText).toBe("You updated Test2's phonenumber entry!");
 
     page.on('dialog', async (dialog) => {
       console.log(dialog.message());
@@ -46,8 +50,11 @@ describe('E2E tests', () => {
     await page.getByRole('button', { name: 'delete' }).last().click();
     await page.waitForTimeout(2000);
 
-    await expect(updatedName).not.toBeVisible();
-    await expect(updatedNumber).not.toBeVisible();
+    await expect(updatedPerson).not.toBeVisible();
+    const notificationAfterDelete = page.getByTestId('notification-container');
+    await expect(notificationAfterUpdate).toBeVisible();
+    const deleteNotificationText = await notificationAfterUpdate.textContent();
+    expect(deleteNotificationText).toBe('You deleted Test2 from the phonebook!');
 
     execSync('docker-compose -f db/docker-compose.test.yaml down', { stdio: 'inherit' });
   });

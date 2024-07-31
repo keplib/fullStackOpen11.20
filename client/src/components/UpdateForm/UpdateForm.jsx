@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import phonebook_service from '../../services/phonebook_service';
 
-export const UpdateForm = ({ personToUpdate, setShowUpdateForm, entries, setEntries }) => {
+export const UpdateForm = ({ personToUpdate, setShowUpdateForm, entries, setEntries, triggerNotification }) => {
   const initialFormData = {
     name: personToUpdate.name,
     phone: personToUpdate.number,
@@ -30,6 +30,7 @@ export const UpdateForm = ({ personToUpdate, setShowUpdateForm, entries, setEntr
     });
     setShowUpdateForm(false);
     setEntries(updatedList);
+    triggerNotification(`You updated ${response.data.name}'s phonenumber entry!`);
   };
 
   return (

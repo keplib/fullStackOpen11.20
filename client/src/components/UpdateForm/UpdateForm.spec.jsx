@@ -23,12 +23,13 @@ test('Component renders with the correct persons values', async () => {
   expect(numberInput.value).toBe('12345');
 });
 
-test('Entries can be updated', async () => {
+test('Entries can be updated and notification will be triggered', async () => {
   vi.mocked(updateEntry).mockResolvedValue({ data: { name: 'test', number: 'test' } });
   const personToUpdate = { name: 'TestPerson', number: '12345' };
 
   const mockSetEntries = vi.fn();
   const mockSetShowUpdateForm = vi.fn();
+  const mockTriggerNotification = vi.fn();
 
   render(
     <UpdateForm
@@ -36,6 +37,7 @@ test('Entries can be updated', async () => {
       setEntries={mockSetEntries}
       personToUpdate={personToUpdate}
       setShowUpdateForm={mockSetShowUpdateForm}
+      triggerNotification={mockTriggerNotification}
     />
   );
 
@@ -45,5 +47,9 @@ test('Entries can be updated', async () => {
 
   await waitFor(() => {
     expect(updateEntry).toHaveBeenCalled();
+  });
+
+  await waitFor(() => {
+    expect(mockTriggerNotification).toHaveBeenCalled();
   });
 });
